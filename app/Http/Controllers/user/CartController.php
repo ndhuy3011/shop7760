@@ -8,6 +8,7 @@ use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+
 class CartController extends Controller
 {
     //
@@ -21,14 +22,15 @@ class CartController extends Controller
         $product = DB::table('product')
             ->where('idproduct', '=', $request->id)->first();
         $color = DB::table('colorproduct')
-            ->join("image","image.colorproductid","=","colorproduct.idcolorproduct")
             ->where('colorproduct.idcolorproduct', '=', $request->color)->first();
+        // dd($request->color);
+        $image = DB::table("image")
+            ->where('colorproductid', '=', $color->idcolorproduct)->first();
         $size = DB::table('sizeproduct')
-            ->where([
-                ['colorproductid', '=', $color->idcolorproduct],
-                ['title', '=', $request->size]
-            ])->first();
-        $name = $product->title . ' / ' . $color->title . ' / ' . $request->size;
+            ->where('colorproductid', '=', $color->idcolorproduct)
+            ->where('title', '=', $request->size)
+            ->first();
+        $name = $product->title . ' / ' . $color->title . ' / ' . $size->title;
         $key =  Str::slug($name);
         $cart = [
             "idproduct" => $product->idproduct,
@@ -37,16 +39,14 @@ class CartController extends Controller
             "Titleproduct" => $name,
             "Amount" => $request->soluong,
             "price" => $product->price,
-            "image" => $color->url
+            "image" => $image->url ?? NULL
         ];
         $request->session()->put("Cart.$key", $cart);
-        print_r(session('Cart'));
-        return redirect("Cart");
+        return redirect()->back();
     }
     public function remove(Request $request)
     {
         $request->session()->forget("Cart.$request->key");
-
         return redirect("Cart");
     }
     public function reset(Request $request)

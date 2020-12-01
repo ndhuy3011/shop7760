@@ -24,24 +24,24 @@
                     <div class="product__details__pic">
                         <div class="product__details__pic__left product__thumb nice-scroll">
                             <a class="pt active" href="#product-1">
-                                <img src="img/product/details/thumb-1.jpg" alt="">
+                                <img src="{{asset("img/product/details/thumb-1.jpg")}}" alt="">
                             </a>
                             <a class="pt" href="#product-2">
-                                <img src="img/product/details/thumb-2.jpg" alt="">
+                                <img src="{{asset("img/product/details/thumb-2.jpg")}}" alt="">
                             </a>
                             <a class="pt" href="#product-3">
-                                <img src="img/product/details/thumb-3.jpg" alt="">
+                                <img src="{{asset("img/product/details/thumb-3.jpg")}}" alt="">
                             </a>
                             <a class="pt" href="#product-4">
-                                <img src="img/product/details/thumb-4.jpg" alt="">
+                                <img src="{{asset("img/product/details/thumb-4.jpg")}}" alt="">
                             </a>
                         </div>
                         <div class="product__details__slider__content">
                             <div class="product__details__pic__slider owl-carousel">
-                                <img data-hash="product-1" class="product__big__img" src="img/product/details/product-1.jpg" alt="">
-                                <img data-hash="product-2" class="product__big__img" src="img/product/details/product-3.jpg" alt="">
-                                <img data-hash="product-3" class="product__big__img" src="img/product/details/product-2.jpg" alt="">
-                                <img data-hash="product-4" class="product__big__img" src="img/product/details/product-4.jpg" alt="">
+                                <img data-hash="product-1" class="product__big__img" src="{{asset("img/product/details/thumb-1.jpg")}}" alt="">
+                                <img data-hash="product-2" class="product__big__img" src="{{asset("img/product/details/thumb-2.jpg")}}" alt="">
+                                <img data-hash="product-3" class="product__big__img" src="{{asset("img/product/details/thumb-3.jpg")}}" alt="">
+                                <img data-hash="product-4" class="product__big__img" src="{{asset("img/product/details/thumb-4.jpg")}}" alt="">
                             </div>
                         </div>
                     </div>

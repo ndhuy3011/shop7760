@@ -75,7 +75,7 @@
                         <li><a href="#"><span class="icon_heart_alt"></span>
                             <div class="tip">2</div>
                         </a></li>
-                        <li><a href="#" id="change-item-cart">
+                    <li><a href="{{url("Cart")}}" id="change-item-cart">
                             <span class="icon_bag_alt"></span>
                             <div class="tip" >{{Session("Cart")?count(Session("Cart")):0}}</div>
                         </a></li>

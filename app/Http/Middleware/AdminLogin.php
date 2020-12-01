@@ -19,15 +19,15 @@ class AdminLogin
     {
         if(Auth::check()){
             $user =Auth::user();
-            if($user->quen==1){
+            if($user->authorities==1){
                 return $next($request);
             }
             else{
-                return redirect('admin/login');
+                return redirect('admins/login');
             }
 
         }else{
-            return redirect('admin/login');
+            return redirect('admins/login');
         }
 
 

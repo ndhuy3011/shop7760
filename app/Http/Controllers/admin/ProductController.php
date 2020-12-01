@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-
+use App\Http\Requests\Admin\InsertProductRequest as AdminInsertProductRequest;
+use App\Http\Requests\Admin\UpdateColorRequest;
+use App\Http\Requests\Admin\UpdateImageRequest;
+use App\Http\Requests\Admin\UpdateProductRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -51,9 +54,10 @@ class ProductController extends Controller
             'Category' => $Category
         ]);
     }
-    public function insert(Request $request)
+    public function insert(AdminInsertProductRequest $request)
     {
-        $request->validate([]);
+        return $request->all();
+        return;
         $idProduct = DB::table('product')->insertGetId([
             'idproducer' => $request->manhacungcap,
             'title' => $request->tensanpham,
@@ -61,7 +65,8 @@ class ProductController extends Controller
             'discount' => $request->giagiam ? $request->giagiam : 0,
             'shortintroduction' => $request->motangan,
             'introduce' => $request->mota,
-            'url' => Str::slug($request->tensanpham)
+            'url' => Str::slug($request->tensanpham),
+            'status'=>$request->trangthai
         ]);
         DB::table('category_products')->insert([
             'categoryid' => $request->danhmuc,
@@ -104,7 +109,7 @@ class ProductController extends Controller
                 'amount' => $item
             ]);
         }
-        return redirect(route('admins.sanpham.update', $id));
+        return redirect()->back();
     }
     /*
         Cập nhập sản phẩm
@@ -113,12 +118,18 @@ class ProductController extends Controller
     public function updateShow($id)
     {
         $Category = DB::table('category')->select('idcategory', 'title')->get();
-        $sanpham = DB::table('product')->where('idproduct', '=', $id)->select()->get();
-        $color = DB::table('colorproduct')->where('productid', '=', $sanpham[0]->idproduct)->select()->get();
+        $sanpham = DB::table('product')
+        ->join("category_products","category_products.productsid",'=','product.idproduct')
+        ->where('idproduct', '=', $id)->select()->first();
+
+        $color = DB::table('colorproduct')->where('productid', '=', $id)
+        ->select()
+        ->get();
         $array = [];
         foreach ($color as $value) {
             $size = DB::select(
-                'SELECT sizeproduct.colorproductid, sizeproduct.idcolorproduct,sizeproduct.amount,sizeproduct.title as sizetitle, colorproduct.title as colortitle
+                'SELECT sizeproduct.colorproductid, sizeproduct.idcolorproduct,sizeproduct.amount,
+                        sizeproduct.title as sizetitle, colorproduct.title as colortitle
                 FROM `colorproduct`
                 JOIN sizeproduct On sizeproduct.colorproductid = colorproduct.idcolorproduct
                 AND sizeproduct.colorproductid = ? ',
@@ -134,7 +145,7 @@ class ProductController extends Controller
             'Category' => $Category
         ]);
     }
-    public function updateProduct(Request $request, $id)
+    public function updateProduct(UpdateProductRequest $request, $id)
     {
         $check = DB::table('product')->where('idproduct', '=', $id)
             ->update([
@@ -144,11 +155,12 @@ class ProductController extends Controller
                 'discount' => $request->giagiam,
                 'shortintroduction' => $request->motangan,
                 'introduce' => $request->mota,
-                'url' => Str::slug($request->tensanpham)
+                'url' => Str::slug($request->tensanpham),
+                'status'=>$request->trangthai
             ]);
 
-        $check2 = DB::table('category_products')->where('productsid', '=', $id)->get();
-        if ($check2) {
+        $check2 = DB::table('category_products')->where('productsid', '=', $id)->first();
+        if (!$check2) {
             DB::table('category_products')->insert([
                 'categoryid' => $request->danhmuc,
                 'productsid' => $id
@@ -159,16 +171,16 @@ class ProductController extends Controller
                 'productsid' => $id
             ]);
         }
-        return redirect(route('admins.sanpham.update', $id));
+        return redirect()->back();
     }
-    public function updateNameColor(Request $request, $id)
+    public function updateNameColor(UpdateColorRequest $request, $id)
     {
         $check = DB::table('colorproduct')
             ->where('idcolorproduct', '=', $id)
             ->update([
                 'title' => $request->color
             ]);
-        return redirect(route('admins.sanpham.update', $request->product));
+        return redirect()->back();
     }
     public function updateSize(Request $request, $id)
     {
@@ -177,7 +189,7 @@ class ProductController extends Controller
             ->update([
                 'amount' => $request->kichthuoc
             ]);
-        return redirect(route('admins.sanpham.update', $request->product));
+        return redirect()->back();
     }
 
     /*
@@ -193,7 +205,7 @@ class ProductController extends Controller
         DB::delete("DELETE FROM `colorproduct` where `idcolorproduct` = ?", [$product[0]->idproduct]);
         DB::delete('DELETE FROM category_products where productsid = ?', [$id]);
         DB::delete("DELETE FROM `product` WHERE `idproduct` = ?", [$id]);
-        return redirect(route('admins.sanpham.index'));
+        return redirect()->back();
     }
     /*
     Xử lý hình ảnh
@@ -217,7 +229,7 @@ class ProductController extends Controller
             ]
         );
     }
-    public function updateImage(Request $request, $id)
+    public function updateImage(UpdateImageRequest $request)
     {
         foreach ($request->hinh as $item) {
             $extension = $item->getClientOriginalExtension();
@@ -230,14 +242,14 @@ class ProductController extends Controller
                 'colorproductid' => $request->idColor
             ]);
         }
-        return redirect(route('admins.sanpham.image', $id));
+        return redirect()->back();
     }
     public function deleteImage($id, Request $request)
     {
         $check = Storage::delete("images/product/$request->path");
-        if($check){
-           DB::delete('DELETE FROM  `image` WHERE idimage = ?', [$id]);
+        if ($check) {
+            DB::delete('DELETE FROM  `image` WHERE idimage = ?', [$id]);
         }
-        return redirect(route('admins.sanpham.image', $request->id));
+        return redirect()->back();
     }
 }

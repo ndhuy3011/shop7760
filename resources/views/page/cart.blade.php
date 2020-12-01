@@ -1,7 +1,7 @@
 @extends('index')
 @section('page')
 @php
-$Cart = Session("Cart");
+$Cart = Session("Cart")??null;
 $sum=0;
 @endphp
 
@@ -40,10 +40,12 @@ $sum=0;
                             </tr>
                         </thead>
                         <tbody>
+                            @if (isset($Cart))
                             @foreach ($Cart as $key => $value)
 
                             @php
-                            $image=$value['image']
+                            $sumproduct=0;
+                            $image=$value['image'];
                             @endphp
                             <tr>
                                 <td class="cart__product__item">
@@ -66,13 +68,16 @@ $sum=0;
                                     </div>
                                 </td>
                                 @php
-                                    $sum += $value['price'] * $value['Amount']
+                                    $sum += $value['price'] * $value['Amount'];
+                                    $sumproduct =$value['price'] * $value['Amount'];
                                 @endphp
-                                <td class="cart__total">{{number_format($sum,0,'','.')}}</td>
+                                <td class="cart__total">{{number_format($sumproduct,0,'','.')}}</td>
                             <td class="cart__close"><a href="removeCart?key={{$key}}"><span class="icon_close"></span></a></td>
                             </tr>
 
                             @endforeach
+                            @endif
+
                         </tbody>
                     </table>
                 </div>
@@ -107,7 +112,7 @@ $sum=0;
                     <li>Subtotal <span>{{number_format($sum,0,'','.')}}</span></li>
                         <li>Total <span>{{number_format($sum,0,'','.')}}</span></li>
                     </ul>
-                    <a href="#" class="primary-btn">Proceed to checkout</a>
+                    <a href="{{url('checkout')}}" class="primary-btn">Proceed to checkout</a>
                 </div>
             </div>
         </div>

@@ -7,6 +7,7 @@ use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\test\Upload;
 use App\Http\Controllers\user\CartController;
+use App\Http\Controllers\user\CheckoutController;
 use App\Http\Controllers\user\ContactController;
 use App\Http\Controllers\user\Home;
 use App\Http\Controllers\user\LoginController;
@@ -32,9 +33,12 @@ Route::get('shop',function(){
 Route::get('details',function(){
     return view('page.details');
 });
-Route::get('checkout',function(){
-    return view('page.checkout');
-});
+
+/*
+    Xác thực thông tin và kiểm tra lại thông tin đơn hàng
+*/
+Route::get('checkout',[CheckoutController::class,'index'])->middleware("auth");
+Route::post('checkout',[CheckoutController::class,'checkout'])->middleware("auth");
 Route::get('sanpham/{url}',[UserProductController::class,'showProduct']);
 
 Route::get('login',[LoginController::class,'index'])->name('login');
@@ -63,16 +67,14 @@ Route::post('testCart',[CartController::class,'addCart']);
 
 // Route::get('addCart/{id}',[CartController::class,'addCart']);
 
-
-
-
 //Route Admin
 Route::get('admins/login',[AdminLoginController::class,'index']);
 Route::post('admins/login',[AdminLoginController::class,'login']);
-Route::prefix('admins')->group(function () {
+Route::prefix('admins')->middleware("authadmin")->group(function () {
     Route::get('/', function () {
         return view('admin.home');
     })->name('admin.home');
+    Route::get('logout',[AdminLoginController::class,'logout'])->name('admins.logout');
     Route::prefix('sanpham')->group(function () {
         Route::get('/', [ProductController::class, 'index'])->name('admins.sanpham.index');
         //Thêm Sản phẩm
@@ -88,7 +90,7 @@ Route::prefix('admins')->group(function () {
         Route::get('xoa/{id}', [ProductController::class, 'delete'])->name('admins.sanpham.xoa');
         /*Route xử lý hình ảnh sản phẩm*/
         Route::get('image/{id}', [ProductController::class, 'imageShow'])->name('admins.sanpham.image');
-        Route::post('image/{id}', [ProductController::class, 'updateImage'])->name('admins.sanpham.image.update');
+        Route::post('image', [ProductController::class, 'updateImage'])->name('admins.sanpham.image.update');
         Route::get('image/delete/{id}', [ProductController::class, 'deleteImage'])->name('admins.sanpham.image.delete');
     });
     Route::prefix('danhmuc')->group(function () {

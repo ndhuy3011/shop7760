@@ -39,17 +39,35 @@
                                 <div class="p-5">
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Chào quản lý</h1>
+
+                                        @if (isset($error))
+                                 
+                                        <div class="alert alert-danger" role="alert">
+                                            {{$error}}
+                                        </div>
+                                        @endif
+
                                     </div>
-                                <form class="user" method="POST" action="{{url('admins/login')}}">
+
+                                    <form class="needs-validation user" method="post" action="{{url('admins/login')}}"
+                                        novalidate>
                                         @csrf
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user" name="email"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Đăng nhập email...">
+                                            <input type="email" class="form-control form-control-user was-validated"
+                                                name="email" id="validationCustom01" aria-describedby="emailHelp"
+                                                placeholder="Đăng nhập email..." required>
+                                            <div class="invalid-feedback">
+                                                Vui lòng bạn nhập đúng email
+                                            </div>
                                         </div>
+
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user" name="password"
-                                                id="exampleInputPassword" placeholder="Mật khẩu...">
+                                            <input type="password"
+                                                class="form-control form-control-user needs-validation " name="password"
+                                                id="validationCustom02" placeholder="Mật khẩu..." required>
+                                            <div class="invalid-feedback">
+                                                Vui lòng bạn nhập password
+                                            </div>
                                         </div>
 
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
@@ -78,7 +96,26 @@
     <script src="{{asset('style/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
     <!-- Custom scripts for all pages-->
     <script src="{{asset('style/js/sb-admin-2.min.js')}}"></script>
-
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function() {
+          'use strict';
+          window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+              form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                  event.preventDefault();
+                  event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+              }, false);
+            });
+          }, false);
+        })();
+    </script>
 </body>
 
 </html>

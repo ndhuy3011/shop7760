@@ -46,7 +46,17 @@
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
-
+    <li class="nav-item ">
+        <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapse4" aria-expanded="true" aria-controls="collapseTwo">
+          <span>Đơn hàng</span>
+        </a>
+        <div id="collapse4" class="collapse" aria-labelledby="heading3" data-parent="#accordionSidebar" style="">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{{route('admins.khachhang.index')}}">Đơn hàng chưa xử lý</a>
+            <a class="collapse-item" href="{{route('admins.khachhang.index')}}">Đơn hàng đã xử lý</a>
+          </div>
+        </div>
+      </li>
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
       <button class="rounded-circle border-0" id="sidebarToggle"></button>

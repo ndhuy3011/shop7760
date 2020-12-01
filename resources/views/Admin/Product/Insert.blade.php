@@ -1,7 +1,7 @@
 @extends('admin')
 @section('pageadmin')
 <div class="container">
-    <form action="{{route('admins.sanpham.them')}}" method="POST" enctype="multipart/form-data">
+    <form action="{{route('admins.sanpham.them')}}" method="POST" enctype="multipart/form-data" novalidate class="needs-validation">
         @csrf
         <div class="row">
             <div class="col-8">
@@ -14,12 +14,18 @@
                             <div class="form-group col-md-3">
                                 <label for="" class="col-form-label">Mã nhà cung cấp <span
                                         style="color:red">*</span></label>
-                                <input type="text" name="manhacungcap" id="" class="form-control">
+                                <input type="text" name="manhacungcap" id="" class="form-control" required>
+                                <div class="invalid-feedback">
+                                    Vui lòng bạn nhập lại
+                                  </div>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="" class="col-form-label">Tên sản phẩm <span
                                         style="color:red">*</span></label>
-                                <input type="text" name="tensanpham" id="" class="form-control">
+                                <input type="text" name="tensanpham" id="" class="form-control" required>
+                                <div class="invalid-feedback">
+                                    Vui lòng bạn nhập lại
+                                  </div>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="" class="col-form-label">Danh mục</label>
@@ -34,11 +40,17 @@
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <label for="" class=" col-form-label">Giá tiền <span style="color:red">*</span></label>
-                                <input type="number" name="giatien" id="" class="form-control">
+                                <input type="number" name="giatien" id="" class="form-control" required min="0">
+                                <div class="invalid-feedback">
+                                    Vui lòng bạn nhập lại
+                                  </div>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="" class=" col-form-label">Giá khuyến mãi</label>
-                                <input type="number" name="giagiam" id="" class="form-control">
+                                <input type="number" name="giagiam" id="" class="form-control" min="0">
+                                <div class="invalid-feedback">
+                                    Vui lòng sửa lại
+                                  </div>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="" class="col-form-label">Trạng thái</label>
@@ -51,13 +63,16 @@
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label for="" class=" col-form-label">Mô tả ngắn</label>
-                                <textarea type="number" name="motangan" id="" class="form-control"></textarea>
+                                <textarea type="number" name="motangan" id="" class="form-control" required></textarea>
+                                <div class="invalid-feedback">
+                                    Vui lòng bạn nhập lại
+                                  </div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label for="" class=" col-form-label">Mô tả chi tiết</label>
-                                <textarea id="editor" name="mota"></textarea>
+                                <textarea id="editor" name="mota" required></textarea>
                             </div>
                         </div>
                     </div>
@@ -71,15 +86,20 @@
                     <div class="card-body">
                         <div class="form-row">
                             <label for="" class=" col-form-label">Tên màu sắc <span style="color:red">*</span></label>
-                            <input type="text" name="color" id="" class="form-control">
-
+                            <input type="text" name="color" id="" class="form-control" required>
+                            <div class="invalid-feedback">
+                                Vui lòng bạn nhập lại
+                              </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label for="" class=" col-form-label">Hình ảnh</label>
                                 <div class="custom-file">
                                     <input type="file" class="form-control-file" id="exampleFormControlFile1"
-                                        multiple="multiple" name="hinh[]">
+                                        multiple="multiple" name="hinh[]" required>
+                                        <div class="invalid-feedback">
+                                            Vui lòng sửa lại
+                                          </div>
                                 </div>
                             </div>
                             {{-- <div class="form-group col-md-3">
@@ -94,17 +114,26 @@
                     </div>
                     <div class="card-body">
                         <div class="form-row">
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <label for="" class=" col-form-label">S</label>
-                                <input type="number" name="kichthuoc[S]" id="" class="form-control">
+                                <input type="number" name="kichthuoc[S]" id="" class="form-control" required min="0">
+                                <div class="invalid-feedback">
+                                    Vui lòng sửa lại
+                                  </div>
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <label for="" class=" col-form-label">M</label>
-                                <input type="number" name="kichthuoc[M]" id="" class="form-control">
+                                <input type="number" name="kichthuoc[M]" id="" class="form-control" required min="0">
+                                <div class="invalid-feedback">
+                                    Vui lòng sửa lại
+                                  </div>
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <label for="" class=" col-form-label">L</label>
-                                <input type="number" name="kichthuoc[L]" id="" class="form-control">
+                                <input type="number" name="kichthuoc[L]" id="" class="form-control" required min="0">
+                                <div class="invalid-feedback">
+                                    Vui lòng sửa lại
+                                  </div>
                             </div>
                             {{-- <div class="form-group col-md-3">
                                     <label for="" class=" col-form-label"></label>
@@ -132,4 +161,24 @@
 @endsection
 @section('editor')
 @include('Admin.PluginJs.Editor')
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+      'use strict';
+      window.addEventListener('load', function() {
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.getElementsByClassName('needs-validation');
+        // Loop over them and prevent submission
+        var validation = Array.prototype.filter.call(forms, function(form) {
+          form.addEventListener('submit', function(event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      }, false);
+    })();
+    </script>
 @endsection
