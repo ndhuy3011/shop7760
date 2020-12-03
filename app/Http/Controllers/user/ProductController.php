@@ -43,4 +43,23 @@ class ProductController extends Controller
             ]
         );
     }
+    public function Category($url)
+    {
+        $image = DB::table('image')->get();
+        $category = DB::table('category') ->get();
+        $product = DB::table('category')
+            ->join('category_products', 'category_products.categoryid', '=', 'category.idcategory')
+            ->join('product', 'product.idproduct', '=', 'category_products.productsid')
+            ->join('colorproduct', 'colorproduct.productid', '=', 'product.idproduct')
+            ->join('image', 'image.colorproductid', '=', 'colorproduct.idcolorproduct')
+            ->select('product.title', 'product.price', 'image.url as urlimage','category.url')
+            ->where('category.url', '=', $url)
+            ->get();
+        return view('page.category',[
+            'image' => $image,
+            'product' => $product,
+            'category' => $category
+
+        ]); 
+    }
 }
