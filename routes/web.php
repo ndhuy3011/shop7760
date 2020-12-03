@@ -54,6 +54,12 @@ Route::get('logout',[LoginController::class,'Logout'])->name('logout');
 
 Route::get('product',[UserProductController::class,'Product']) -> name('product');
 
+Route::get('search',[SearchController::class,'Search']) ->name('search');
+/*
+Danh muc san pham
+*/
+
+Route::get('product/{url}',[UserProductController::class,'Category']) ->name('category');
 Route::get('contact',[ContactController::class,'index']) -> name('contact');
 /*
 Giỏ hàng
