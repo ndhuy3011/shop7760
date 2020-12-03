@@ -61,15 +61,15 @@ Giỏ hàng
 Route::get('Cart',[CartController::class,'show']);
 Route::get('removeCart',[CartController::class,'remove']);
 Route::get('resetCart',[CartController::class,'reset']);
+Route::post('addCart',[CartController::class,'addCart']);
 /**Testttt
  *
  */
 Route::get('test',[Upload::class,'index']);
 Route::post('test',[Upload::class,'upload']);
-Route::post('testCart',[CartController::class,'addCart']);
 
 
-// Route::get('addCart/{id}',[CartController::class,'addCart']);
+
 
 //Route Admin
 Route::get('admins/login',[AdminLoginController::class,'index']);
