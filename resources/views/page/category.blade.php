@@ -1,17 +1,29 @@
 @extends('index')
+
 @section('page')
-<!-- Breadcrumb Begin -->
+
+
 <div class="breadcrumb-option">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="breadcrumb__links">
                     <a href="./index.html"><i class="fa fa-home"></i> Home</a>
-                    <span>Shop</span>
+                    <span>Category</span>
                 </div>
             </div>
         </div>
     </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4">
+                <div class="section-title">
+                    
+                    <p class="pull-left">Tìm thấy {{count($product)}} sản phẩm</p>
+                </div>
+            </div>
+            
+        </div>
 </div>
 <!-- Breadcrumb End -->
 <!-- Shop Section Begin -->
@@ -29,7 +41,7 @@
                                 <div class="card">
                                     
                                     <ul class="card-heading">
-                        @foreach($category as $c)
+                      @foreach($category as $c)
                         
                                     
                          <a href="{{route('category',$c->url)}}" >{{$c->title}}</a>
@@ -155,25 +167,26 @@
                     </div>
                 </div>
             </div>
-
+            
             <div class="col-lg-9 col-md-9">
-                <div class="row">
+                <div class="row"> 
                     @foreach ($product as $item)
                     <div class="col-lg-4 col-md-6">
                         <div class="product__item">
                             <div class="product__item__pic set-bg" >
                                 <a href="#">
+                                    
                                      <img src="{{asset("images/product/$item->urlimage")}}" >
                                 </a>
                                   <div class="label new">New</div>
                                     <ul class="product__hover">
-                                        <li><a href="{{url("./img/product/$item->urlimage")}}" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                        <li><a href="{{asset("image/product/$item->urlimage")}}" class="image-popup"><span class="arrow_expand"></span></a></li>
                                         <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                        <li><a href="javascript:" onclick="AddCart({{$item->idproduct}})"><span class="icon_bag_alt"></span></a></li>
+                                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
                                     </ul>
                             </div>
                             <div class="product__item__text">
-                            <h6><a href="{{url("sanpham/$item->url")}}">{{$item->title}}</a></h6>
+                            <h6><a href="./{{$item->title}}">{{$item->title}}</a></h6>
                                 <div class="rating">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -185,14 +198,14 @@
                             </div>
                         </div>
                     </div>
-            @endforeach
-
-
-
-
-
-
-
+            @endforeach       
+                    
+                    
+                    
+                    
+                    
+                   
+                    
                     <div class="col-lg-12 text-center">
                         <div class="pagination__option">
                             <a href="#">1</a>
@@ -205,6 +218,11 @@
             </div>
         </div>
     </div>
+
+
+
+
+
 </section>
-<!-- Shop Section End -->
+
 @endsection
