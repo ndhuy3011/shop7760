@@ -13,6 +13,7 @@ use App\Http\Controllers\user\ContactController;
 use App\Http\Controllers\user\Home;
 use App\Http\Controllers\user\LoginController;
 use App\Http\Controllers\user\ProductController as UserProductController;
+use App\Http\Controllers\user\SearchController;
 use Illuminate\Support\Facades\Route;
 
 /*
