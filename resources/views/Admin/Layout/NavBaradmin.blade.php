@@ -52,8 +52,8 @@
         </a>
         <div id="collapse4" class="collapse" aria-labelledby="heading3" data-parent="#accordionSidebar" style="">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{{route('admins.khachhang.index')}}">Đơn hàng chưa xử lý</a>
-            <a class="collapse-item" href="{{route('admins.khachhang.index')}}">Đơn hàng đã xử lý</a>
+            <a class="collapse-item" href="{{route('admins.donhan.chuaxuly')}}">Đơn hàng chưa xử lý</a>
+            <a class="collapse-item" href="{{route('admins.khachhang.hoanthanh')}}">Đơn hàng đã xử lý</a>
           </div>
         </div>
       </li>

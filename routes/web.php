@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\CkeditorController;
+use App\Http\Controllers\admin\InvoiceController;
 use App\Http\Controllers\admin\LoginController as AdminLoginController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\UserController;
@@ -39,6 +40,9 @@ Route::get('details',function(){
 */
 Route::get('checkout',[CheckoutController::class,'index'])->middleware("auth");
 Route::post('checkout',[CheckoutController::class,'checkout'])->middleware("auth");
+
+
+
 Route::get('sanpham/{url}',[UserProductController::class,'showProduct']);
 
 Route::get('login',[LoginController::class,'index'])->name('login');
@@ -103,6 +107,12 @@ Route::prefix('admins')->middleware("authadmin")->group(function () {
     });
     Route::prefix('khachhang')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('admins.khachhang.index');
+    });
+    Route::prefix('donhang')->group(function () {
+        Route::get('chuaxuly', [InvoiceController::class, 'NoProcess'])->name('admins.donhan.chuaxuly');
+        Route::get('hoanthanh', [InvoiceController::class, 'complete'])->name('admins.khachhang.hoanthanh');
+        Route::get('handling/{id}',[InvoiceController::class,'handling'])->name('admins.khachhang.dangtienhanh');
+        Route::get('detail/{id}',[InvoiceController::class,'detail'])->name('admins.khachhang.chitiet');
     });
 });
 Route::post('Ckeditor/upload', [CkeditorController::class, 'upload'])->name('ckeditor.upload');
