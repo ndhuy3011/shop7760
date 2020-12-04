@@ -306,7 +306,8 @@
     error: function(data){
         alert("Thêm thất bại");
     }
-    });}
+    });
+    }
 
 </script>
 @endsection

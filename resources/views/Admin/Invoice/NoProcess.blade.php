@@ -30,7 +30,7 @@
                             <td>{{$item->date}}</td>
                             <td>{{$item->phonenumber}}</td>
                             <td>{{$item->address}}</td>
-                            <td>{{number_format($$item->totalmoney,0,'','.')}} ₫</td>
+                            <td>{{number_format($item->totalmoney,0,'','.')}} ₫</td>
                             <td>
                                 @if ($item->status==0)
                                 {{"Chưa xử lý đơn hàng"}}
