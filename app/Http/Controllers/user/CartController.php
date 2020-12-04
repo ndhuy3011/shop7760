@@ -18,7 +18,7 @@ class CartController extends Controller
     }
     public function addCart(Request $request)
     {
-       
+
         $product = DB::table('product')
             ->where('idproduct', '=', $request->id)->first();
         $color = DB::table('colorproduct')
@@ -44,8 +44,7 @@ class CartController extends Controller
             "image" => $image->url ?? NULL
         ];
         $request->session()->put("Cart.$key", $cart);
-
-
+        return view('ajax.Cart');
     }
     public function remove(Request $request)
     {
