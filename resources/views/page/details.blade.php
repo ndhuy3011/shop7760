@@ -20,32 +20,21 @@
 <section class="product-details spad">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-6" id="image_colors">
                 <div class="product__details__pic">
                     <div class="product__details__pic__left product__thumb nice-scroll">
-                        <a class="pt active" href="#product-1">
-                            <img src="{{asset("img/product/details/thumb-1.jpg")}}" alt="">
+                        @foreach ($image as $item)
+                        <a class="pt {{$loop->index==0?'active':''}}" href="#product-{{$loop->index+1}}">
+                            <img src="{{asset("images/product/".$item->url)}}" alt="">
                         </a>
-                        <a class="pt" href="#product-2">
-                            <img src="{{asset("img/product/details/thumb-2.jpg")}}" alt="">
-                        </a>
-                        <a class="pt" href="#product-3">
-                            <img src="{{asset("img/product/details/thumb-3.jpg")}}" alt="">
-                        </a>
-                        <a class="pt" href="#product-4">
-                            <img src="{{asset("img/product/details/thumb-4.jpg")}}" alt="">
-                        </a>
+                        @endforeach
                     </div>
                     <div class="product__details__slider__content">
                         <div class="product__details__pic__slider owl-carousel">
-                            <img data-hash="product-1" class="product__big__img"
-                                src="{{asset("img/product/details/thumb-1.jpg")}}" alt="">
-                            <img data-hash="product-2" class="product__big__img"
-                                src="{{asset("img/product/details/thumb-2.jpg")}}" alt="">
-                            <img data-hash="product-3" class="product__big__img"
-                                src="{{asset("img/product/details/thumb-3.jpg")}}" alt="">
-                            <img data-hash="product-4" class="product__big__img"
-                                src="{{asset("img/product/details/thumb-4.jpg")}}" alt="">
+                            @foreach ($image as $item)
+                            <img data-hash="product-{{$loop->index+1}}" class="product__big__img"
+                                src="{{asset("images/product/".$item->url)}}" alt="">
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -53,18 +42,11 @@
             <div class="col-lg-6">
                 <div class="product__details__text">
                     <h3>{{$product->title}}<span>Brand: SKMEIMore Men Watches from SKMEI</span></h3>
-                    {{-- <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <span>( 138 reviews )</span>
-                        </div> --}}
+
                     <div class="product__details__price">{{number_format($product->price,0,'','.')}}
                         ₫<span>{{number_format($product->discount,0,'','.')}} ₫</span></div>
                     <p>{{$product->shortintroduction}}</p>
-                    {{-- method="POST" action="{{url("addCart?id=$product->idproduct")}}" --}}
+
 
                     @csrf
                     <div class="product__details__button">
@@ -74,7 +56,8 @@
                                 <input type="text" value="1" name="soluong" id="soluong">
                             </div>
                         </div>
-                        <button type="submit" class="cart-btn" onclick="buy()"><span class="icon_bag_alt"></span> Add to
+                        <button type="submit" class="cart-btn" onclick="buy()"><span class="icon_bag_alt"></span>
+                            Add to
                             cart</button>
                         <ul>
                             <li><a href="#"><span class="icon_heart_alt"></span></a></li>
@@ -87,30 +70,25 @@
                                 <span>Màu sắc:</span>
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                     @foreach ($color as $item)
-                                    <label class="btn btn-outline-primary">
+                                    <label class="btn btn-light {{$loop->index==0?'active':''}}">
                                         <input type="radio" name="color" id="option{{$loop->index+1}}"
+                                            onclick="imagecolor({{$item->idcolorproduct}})"
                                             value="{{$item->idcolorproduct}}" {{$loop->index==0?"checked":""}}>
                                         {{$item->title}}
                                     </label>
                                     @endforeach
-
                                 </div>
                             </li>
                             <li>
                                 <span>Kích thước:</span>
                                 <div class="size__btn">
-                                    <label for="s-btn" class="active">
-                                        <input type="radio" id="s-btn" name="size" value="S" checked>
-                                        s
+                                    @foreach ($size as $item)
+                                    <label for="{{$item->title}}-btn" class="{{$item->amount==0?'disabled':''}}">
+                                        <input type="radio" id="{{$item->title}}-btn" name="size"
+                                            value="{{$item->title}}">
+                                        {{$item->title}}
                                     </label>
-                                    <label for="m-btn">
-                                        <input type="radio" id="m-btn" name="size" value="M">
-                                        m
-                                    </label>
-                                    <label for="l-btn">
-                                        <input type="radio" id="l-btn" name="size" value="L">
-                                        l
-                                    </label>
+                                    @endforeach
                                 </div>
                             </li>
                             <li>
@@ -138,41 +116,40 @@
                     <div class="tab-content">
                         <div class="tab-pane active" id="tabs-1" role="tabpanel">
                             <h6>Description</h6>
-                            <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed
-                                quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt loret.
-                                Neque porro lorem quisquam est, qui dolorem ipsum quia dolor si. Nemo enim ipsam
-                                voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed quia ipsu
-                                consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Nulla
-                                consequat massa quis enim.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
-                                dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
-                                nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
-                                quis, sem.</p>
+                            {!!$product->introduce!!}
                         </div>
                         <div class="tab-pane" id="tabs-2" role="tabpanel">
                             <h6>Specification</h6>
-                            <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed
+                            <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut loret fugit,
+                                sed
                                 quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt loret.
                                 Neque porro lorem quisquam est, qui dolorem ipsum quia dolor si. Nemo enim ipsam
                                 voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed quia ipsu
                                 consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Nulla
                                 consequat massa quis enim.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
-                                dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
-                                nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula
+                                eget
+                                dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient
+                                montes,
+                                nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu,
+                                pretium
                                 quis, sem.</p>
                         </div>
                         <div class="tab-pane" id="tabs-3" role="tabpanel">
                             <h6>Reviews ( 2 )</h6>
-                            <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed
+                            <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut loret fugit,
+                                sed
                                 quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt loret.
                                 Neque porro lorem quisquam est, qui dolorem ipsum quia dolor si. Nemo enim ipsam
                                 voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed quia ipsu
                                 consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Nulla
                                 consequat massa quis enim.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
-                                dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
-                                nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula
+                                eget
+                                dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient
+                                montes,
+                                nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu,
+                                pretium
                                 quis, sem.</p>
                         </div>
                     </div>
@@ -285,29 +262,54 @@
 <!-- Product Details Section End -->
 @endsection
 @section('js')
-<script>
+<script type="text/javascript">
     function buy(e){
-    var fd = new FormData();
-    fd.append( '_token', $("input[name='_token']").val());
-    fd.append( 'soluong', $("input[name='soluong']").val());
-    fd.append( 'color', $("input[name='color']:checked").val());
-    fd.append( 'size', $("input[name='size']:checked").val());
-    $.ajax({
-    url: '{{url("addCart?id=$product->idproduct")}}',
-    data: fd,
-    processData: false,
-    contentType: false,
-    method: 'POST',
-    success: function(data){
-        alert("Them thanh cong");
-        $("#change-item-cart").empty();
-        $("#change-item-cart").html(data);
-    },
-    error: function(data){
-        alert("Thêm thất bại");
+        try{
+        var fd = new FormData();
+        fd.append( '_token', $("input[name='_token']").val());
+        fd.append( 'soluong', $("input[name='soluong']").val());
+        fd.append( 'color', $("input[name='color']:checked").val());
+        fd.append( 'size', $("input[name='size']:checked").val());
+        $.ajax({
+        url: '{{url("addCart?id=$product->idproduct")}}',
+        data: fd,
+        processData: false,
+        contentType: false,
+        method: 'POST',
+        success: function(data){
+            alertify.set('notifier','position', 'top-center');
+            alertify.success('Thêm sản phẩm vào giỏ hàng thành công');
+            $("#change-item-cart").empty();
+            $("#change-item-cart").html(data);
+        },
+        error: function(data){
+            var errors = data.responseJSON;
+            $.each( errors.errors, function( key, value ) {
+                alertify.set('notifier','position', 'top-center');
+                alertify.error(value);
+            });
+        }
+        });
+        }catch(data){
+            var errors = data.responseJSON;
+            $.each( errors.errors, function( key, value ) {
+                alertify.set('notifier','position', 'top-center');
+                alertify.error(value);
+            });
+        }
     }
-    });
+    function imagecolor(id){
+        $.ajax({
+            url:'{{url("image?id=")}}'+ id,
+            processData:false,
+            contentType:false,
+            method:'GET',
+            success: function(data){
+                $('#image_colors').empty();
+                $('#image_colors').html(data);
+                $('#js').empty();
+            },
+        })
     }
-
 </script>
 @endsection

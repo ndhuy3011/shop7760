@@ -16,7 +16,7 @@ class LoginController extends Controller
         return view ('page.login');
     }
     public function Register(Request $request){
-        
+
         $Data = $request->validate([
             'email'=>'required',
             'name'=>'required',

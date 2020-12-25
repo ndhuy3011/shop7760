@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
 
@@ -15,7 +17,7 @@ class CategoryController extends Controller
     {
         $Category = DB::table('category')->get();
 
-        return view('Admin.Category.List', [
+        return view('admin.category.list', [
             'Category' => $Category
         ]);
     }
@@ -23,7 +25,7 @@ class CategoryController extends Controller
     {
 
         $Category = DB::table('category')->get();
-        return view('Admin.Category.Insert', [
+        return view('admin.category.insert', [
             'Category' => $Category
         ]);
     }
@@ -48,24 +50,34 @@ class CategoryController extends Controller
     }
     public function delete(Request $request)
     {
-        $delete = DB::delete("delete from category where idcategory = ?", [$request->id]);
-        if ($delete == true) {
-            return  redirect('./admins/danhmuc');
-        } else {
-            return "lưu không thành công";
-        }
+        DB::beginTransaction();
+        try {
+            $categoryproducts = DB::table('category_products')->where('categoryid', '=', ' $request->id')->first();
+            if (isset($categoryproducts)) {
+                DB::rollback();
+                return redirect()->back()->withErrors("Danh mục có sản phẩm không xoá được");
+            }
+            DB::table('category')->where('idcategory', '=', $request->id)->delete();
+            Session::flash('Msg', "Xoá thành công");
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollback();
+            return redirect()->back()->withErrors("Danh mục có danh mục con không xoá được");
+        };
+        return redirect()->back();
     }
     public function updateShow(Request $request)
     {
         $ListCategory = DB::table('category')->get();
         $Category = DB::table('category')->where('idCategory', $request->id)->get();
-        return view('Admin.Category.Update', [
+        return view('admin.category.update', [
             'ListCategory' => $ListCategory,
             'Category' => $Category
         ]);
     }
     public function update(Request $request)
     {
+
         $update = DB::update(
             'update category set title = ?,url = ?, sort = ?, status = ? ,categoryId = ? where idcategory = ?',
             [

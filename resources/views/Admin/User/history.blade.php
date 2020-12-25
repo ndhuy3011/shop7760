@@ -4,7 +4,7 @@
 <div class="container-fluid">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Danh sách khách hàng</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Lịch sử khách hàng {{$name->name}} </h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -12,26 +12,28 @@
                     <thead>
                         <tr>
                             <th>STT</th>
-                            <th>Email</th>
-                            <th>Tên</th>
+                            <th>Mã hoá đơn</th>
                             <th>SĐT</th>
-                            <th>Điểm</th>
+                            <th>Số lượng sản phẩm</th>
+                            <th>Tổng tiền</th>
                             <th>Địa chỉ</th>
+                            <th>Thời gian</th>
                             <th>Trạng thái</th>
                             <th>Lịch sử mua hàng</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($user as $item)
+                        @foreach ($datainvoice as $item)
                         <tr>
                             <td>{{$loop->index+1}}</td>
-                            <td>{{$item->email}}</td>
-                            <td>{{$item->name}}</td>
-                            <td>{{$item->numberphone}}</td>
-                            <td>{{$item->point}}</td>
+                            <td>{{$item->idinvoice}}</td>
+                            <td>{{$item->phonenumber}}</td>
+                            <th>{{$item->soluong}}</th>
+                            <td>{{$item->totalmoney}}</td>
                             <td>{{$item->address}}</td>
+                            <td>{{$item->date}}</td>
                             <td>{{$item->status}}</td>
-                            <td><a href="{{route('admins.khachhang.history',['id'=>$item->id])}}" class="btn btn-info btn-circle btn-sm"><i
+                            <td><a href="#" class="btn btn-info btn-circle btn-sm"><i
                                         class="fas fa-info-circle"></i></a></td>
                         </tr>
                         @endforeach

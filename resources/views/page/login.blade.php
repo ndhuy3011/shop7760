@@ -1,8 +1,8 @@
 @extends('index')
 
 @section('page')
-<div class="contact"></div>
-<div class="container login">
+<div class="contact" style="background-color:papayawhip">
+<div class="container login" >
     <div class="row">
         <div class="col-5">
             <form class="form"  method="post" action="{{route('login')}}">
@@ -16,16 +16,16 @@
                 <div class="row">
                     <label>Email:</label>
                 </div>
-                <div class="row">
-                    <input type="email" name="email" id="" style="width: 100%">
+                <div class="row" >
+                    <input type="email" name="email" id="" style="border-color:pink;border-radius:5px; width: 100%">
                 </div>
                 <div class="row">
                     <label>Mật khẩu:</label>
                 </div>
                 <div class="row">
-                    <input type="password" name="password" id="" style="width: 100%">
+                    <input type="password" name="password" id="" style=" border-color:pink;border-radius:5px;width: 100%">
                 </div>
-            <div class="row justify-content-end">   <button type="submit" class="btn btn-light"> ĐĂNG NHẬP</button></div>
+            <div class="row justify-content-end">   <button type="submit" style="background-color:pink" class="btn btn-light"> ĐĂNG NHẬP</button></div>
             </form>
         </div>
         <div class="col-1" ></div>
@@ -42,24 +42,24 @@
                     <label>Tên:</label>
                 </div>
                 <div class="row">
-                    <input type="text" name="name" id="" style="width: 100%">
+                    <input type="text" name="name" id="" style="border-color:pink;border-radius:5px;width: 100%">
                 </div>
                 <div class="row">
                     <label>Email:</label>
                 </div>
                 <div class="row">
-                    <input type="email" name="email" id="" style="width: 100%">
+                    <input type="email" name="email" id="" style="border-color:pink;border-radius:5px;width: 100%">
                 </div>
                 <div class="row">
                     <label>Mật khẩu:</label>
                 </div>
                 <div class="row">
-                    <input type="password" name="password" id="" style="width: 100%">
+                    <input type="password" name="password" id="" style="border-color:pink;border-radius:5px;width: 100%">
                 </div>
-            <div class="row justify-content-end">   <button type="submit" class="btn btn-light"> ĐĂNG KÝ</button></div>
+            <div class="row justify-content-end">   <button type="submit" style="background-color:pink" class="btn btn-light"> ĐĂNG KÝ</button></div>
             </form>
         </div>
     </div>
-    <div class="contact"></div>
+</div>  
 @endsection
 

@@ -5,7 +5,7 @@ namespace App\Http\Requests\Admin;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class UpdateSizeRequest extends FormRequest
+class InsertColorProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -36,15 +36,22 @@ class UpdateSizeRequest extends FormRequest
     {
         return [
             //
-            'kichthuoc'=>'required|min:0|numeric'
+            'color' => 'required',
+            'kichthuoc.*'=>'required|min:0|numeric'
         ];
     }
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
     public function messages()
     {
         return [
-            'kichthuoc.required' => 'Bạn nhập Số lượng',
-            'kichthuoc.min' => 'Bạn nhập Số lượng lớn hơn 0',
-            'kichthuoc.numeric' => 'Bạn nhập Số lượng bàng số ',
+            'color.required' => 'Bạn phải nhập màu',
+            'kichthuoc.*.required'=>'Bạn nhập Số lượng',
+            'kichthuoc.*.min'=>'Bạn nhập Số lượng lớn hơn 0',
+            'kichthuoc.*.numeric'=>'Bạn nhập Số lượng bàng số',
         ];
     }
 }

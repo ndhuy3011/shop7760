@@ -2,6 +2,20 @@
 @section('pageadmin')
 
 <div class="container">
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+    @if (Session::has('Msg'))
+    <div class="alert alert-success">
+        <strong>{{Session('Msg')}}</strong>
+    </div>
+    @endif
     <div class="row">
         <div class="col-12">
             <div class="card shadow mb-4">
@@ -74,5 +88,5 @@
 </div>
 @endsection
 @section('editor')
-@include('Admin.PluginJs.dataTable')
+@include('admin.pluginjs.datatable')
 @endsection

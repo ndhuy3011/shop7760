@@ -35,7 +35,15 @@ class UpdateImageRequest extends FormRequest
     public function rules()
     {
         return [
-            'hinh' => 'image|required',
+            'hinh' => 'required',
+            'hinh.*' => 'image|mimes:jpeg,jpg,png,gif,webp',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'hinh.required' => 'Bạn không được để trống hình',
+            'hinh.*.image' => 'Gửi file hình ảnh không hợp lệ',
         ];
     }
 }

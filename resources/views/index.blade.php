@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="{{asset("css/magnific-popup.css")}}" type="text/css">
     <link rel="stylesheet" href="{{asset("css/owl.carousel.min.css")}}" type="text/css">
     <link rel="stylesheet" href="{{asset("css/slicknav.min.css")}}" type="text/css">
+    <link rel="stylesheet" href="{{asset("css/alertify.min.css")}}" type="text/css">
+    <link rel="stylesheet" href="{{asset("css/themes/bootstrap.min.css")}}" type="text/css">
     <link rel="stylesheet" href="{{asset("css/style.css")}}" type="text/css">
 </head>
 
@@ -40,20 +42,7 @@
 <script src="{{asset("js/jquery.slicknav.js")}}"></script>
 <script src="{{asset("js/owl.carousel.min.js")}}"></script>
 <script src="{{asset("js/jquery.nicescroll.min.js")}}"></script>
+<script src="{{asset("js/alertify.min.js")}}"></script>
 <script src="{{asset("js/main.js")}}"></script>
 @yield('js')
-{{-- <script>
-    function AddCart(id){
-        $.ajax({
-            url:'addCart/'+id,
-            type:'GET',
-        }).done(function(response){
-            console.log(response);
-            $("#change-item-cart").empty();
-            $("#change-item-cart").html(response);
-
-        });
-    }
-</script> --}}
-
 </html>

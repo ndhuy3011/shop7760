@@ -12,7 +12,12 @@ class CheckoutController extends Controller
     //
     public function index()
     {
-        return view('page.checkout');
+        if(Session('Cart')){
+
+            return view('page.checkout');
+        }else{
+            return redirect('/');
+        }
     }
     public function checkout(Request $request)
     {

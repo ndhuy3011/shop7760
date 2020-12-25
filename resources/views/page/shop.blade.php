@@ -15,7 +15,7 @@
 </div>
 <!-- Breadcrumb End -->
 <!-- Shop Section Begin -->
-<section class="shop spad">
+<section class="shop spad" >
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-3">

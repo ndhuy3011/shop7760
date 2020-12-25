@@ -38,5 +38,5 @@
 </div>
 @endsection
 @section('dataTable',)
-@include('Admin.PluginJs.dataTable')
+@include('admin.pluginjs.datatable')
 @endsection

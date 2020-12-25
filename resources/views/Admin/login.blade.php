@@ -40,10 +40,9 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Chào quản lý</h1>
 
-                                        @if (isset($error))
-                                 
-                                        <div class="alert alert-danger" role="alert">
-                                            {{$error}}
+                                        @if($errors->any())
+                                        <div class="alert alert-danger">
+                                            <strong>{{$errors->first()}}!</strong>
                                         </div>
                                         @endif
 

@@ -1,6 +1,21 @@
 @extends('admin')
 @section('pageadmin')
 <div class="container">
+
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+    @if (Session::has('Msg'))
+    <div class="alert alert-success">
+        <strong>{{Session('Msg')}}</strong>
+    </div>
+    @endif
     <div class="row">
         <div class="col-6">
             <div class="card shadow mb-4">
@@ -24,10 +39,18 @@
                             <div class="form-group col-md-3">
                                 <label for="" class="col-form-label">Danh mục</label>
                                 <select class="custom-select mr-sm-4" id="inlineFormCustomSelect" name="danhmuc">
+                                    @if (isset($Category_Product))
                                     @foreach ($Category as $item)
-                                    <option value="{{$item->idcategory}}" {{$sanpham->categoryid==$item->idcategory?'selected':''}}>
+                                    <option value="{{$item->idcategory}}"
+                                        {{$Category_Product->categoryid==$item->idcategory?'selected':''}}>
                                         {{$item->title}}</option>
                                     @endforeach
+                                    @else
+                                    @foreach ($Category as $item)
+                                    <option value="{{$item->idcategory}}">
+                                        {{$item->title}}</option>
+                                    @endforeach
+                                    @endif
                                 </select>
                             </div>
                         </div>
@@ -181,5 +204,5 @@
 </div>
 @endsection
 @section('editor')
-@include('Admin.PluginJs.Editor')
+@include('admin.pluginjs.editor')
 @endsection

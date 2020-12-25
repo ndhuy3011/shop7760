@@ -15,19 +15,15 @@ class LoginController extends Controller
         if(Auth::check()){
             return redirect("admins");
         }
-        return view("Admin.login");
+        return view("admin.login");
     }
     public function login(LoginRequest $request)
     {
-        // $request->validate([
-        //     'email' => ['email:rfc,dns'],
-        //     'password' => ['password:api']
-        // ]);
         $request->except("_token");
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             return redirect("admins");
         } else {
-            return view("Admin.login", ["error" => "tài khoản hoặc mật khẩu sai"]);
+            return redirect()->back()->withErrors('Bạn sai email hoặc sai mật khẩu');
         }
     }
     public function logout()

@@ -40,19 +40,11 @@
                 <nav class="header__menu">
                     <ul>
                         <li class="active"><a href="{{asset("/")}}">Home</a></li>
-                        <li><a href="#">Women’s</a></li>
-                        <li><a href="#">Men’s</a></li>
+                        @foreach ($dataheader as $item)
+                        <li><a href="{{url('product',$item->url)}}">{{$item->title}}</a></li>
+                        @endforeach
                         <li><a href="{{route("product")}}">Shop</a></li>
-                        <li><a href="#">Pages</a>
-                            <ul class="dropdown">
-                                <li><a href="./product-details">Product Details</a></li>
-                                <li><a href="./shop-cart">Shop Cart</a></li>
-                                <li><a href="./checkout">Checkout</a></li>
-                                <li><a href="./blog-details">Blog Details</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="./blog">Blog</a></li>
-                    <li><a href="./{{route("contact")}}">Contact</a></li>
+                    <li><a href="{{url("contact")}}">Contact</a></li>
                     </ul>
                 </nav>
             </div>
@@ -75,7 +67,7 @@
                         <li><a href="#"><span class="icon_heart_alt"></span>
                             <div class="tip">2</div>
                         </a></li>
-                    <li><a href="{{url("Cart")}}" id="change-item-cart">
+                    <li><a href="{{url("cart")}}" id="change-item-cart">
                             <span class="icon_bag_alt"></span>
                             <div class="tip" >{{Session("Cart")?count(Session("Cart")):0}}</div>
                         </a></li>

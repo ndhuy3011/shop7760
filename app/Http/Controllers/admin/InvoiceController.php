@@ -17,7 +17,7 @@ class InvoiceController extends Controller
             ->whereNotIn('invoice.status', [4])
             ->orderByDesc('invoice.idinvoice')
             ->get();
-        return view('Admin.Invoice.noprocess', [
+        return view('admin.invoice.noprocess', [
             'data' => $data
         ]);
     }
@@ -40,7 +40,7 @@ class InvoiceController extends Controller
             ->Where('invoice.status', '=', 4)
             ->orderByDesc('invoice.idinvoice')
             ->get();
-        return view('Admin.Invoice.complete', [
+        return view('admin.invoice.complete', [
             'data' => $data
         ]);
     }
@@ -51,8 +51,8 @@ class InvoiceController extends Controller
             ->where('invoicedetails.invoiceid','=',$id)
             ->select()
             ->get();
-           
-            return view('Admin.Invoice.detail', [
+
+            return view('admin.invoice.detail', [
                 'data' => $data
             ]);
 
