@@ -36,6 +36,15 @@ class UpdateSizeRequest extends FormRequest
     {
         return [
             //
+            'kichthuoc'=>'required|min:0|numeric'
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'kichthuoc.required' => 'Bạn nhập Số lượng',
+            'kichthuoc.min' => 'Bạn nhập Số lượng lớn hơn 0',
+            'kichthuoc.numeric' => 'Bạn nhập Số lượng bàng số ',
         ];
     }
 }

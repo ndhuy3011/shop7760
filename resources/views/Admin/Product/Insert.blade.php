@@ -1,7 +1,22 @@
 @extends('admin')
 @section('pageadmin')
 <div class="container">
-    <form action="{{route('admins.sanpham.them')}}" method="POST" enctype="multipart/form-data" novalidate class="needs-validation">
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+    @if (Session::has('Msg'))
+    <div class="alert alert-success">
+        <strong>{{Session('Msg')}}</strong>
+    </div>
+    @endif
+    <form action="{{route('admins.sanpham.them')}}" method="POST" enctype="multipart/form-data" novalidate
+        class="needs-validation">
         @csrf
         <div class="row">
             <div class="col-8">
@@ -17,7 +32,7 @@
                                 <input type="text" name="manhacungcap" id="" class="form-control" required>
                                 <div class="invalid-feedback">
                                     Vui lòng bạn nhập lại
-                                  </div>
+                                </div>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="" class="col-form-label">Tên sản phẩm <span
@@ -25,7 +40,7 @@
                                 <input type="text" name="tensanpham" id="" class="form-control" required>
                                 <div class="invalid-feedback">
                                     Vui lòng bạn nhập lại
-                                  </div>
+                                </div>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="" class="col-form-label">Danh mục</label>
@@ -40,17 +55,18 @@
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <label for="" class=" col-form-label">Giá tiền <span style="color:red">*</span></label>
-                                <input type="number" name="giatien" id="" class="form-control" required min="0">
+                                <input type="number" name="giatien" id="giatien" class="form-control" required min="0"
+                                    onkeydown="vailgiatien()">
                                 <div class="invalid-feedback">
                                     Vui lòng bạn nhập lại
-                                  </div>
+                                </div>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="" class=" col-form-label">Giá khuyến mãi</label>
                                 <input type="number" name="giagiam" id="" class="form-control" min="0">
                                 <div class="invalid-feedback">
                                     Vui lòng sửa lại
-                                  </div>
+                                </div>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="" class="col-form-label">Trạng thái</label>
@@ -66,7 +82,7 @@
                                 <textarea type="number" name="motangan" id="" class="form-control" required></textarea>
                                 <div class="invalid-feedback">
                                     Vui lòng bạn nhập lại
-                                  </div>
+                                </div>
                             </div>
                         </div>
                         <div class="form-row">
@@ -89,7 +105,7 @@
                             <input type="text" name="color" id="" class="form-control" required>
                             <div class="invalid-feedback">
                                 Vui lòng bạn nhập lại
-                              </div>
+                            </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-12">
@@ -97,9 +113,9 @@
                                 <div class="custom-file">
                                     <input type="file" class="form-control-file" id="exampleFormControlFile1"
                                         multiple="multiple" name="hinh[]" required>
-                                        <div class="invalid-feedback">
-                                            Vui lòng sửa lại
-                                          </div>
+                                    <div class="invalid-feedback">
+                                        Vui lòng sửa lại
+                                    </div>
                                 </div>
                             </div>
                             {{-- <div class="form-group col-md-3">
@@ -119,21 +135,21 @@
                                 <input type="number" name="kichthuoc[S]" id="" class="form-control" required min="0">
                                 <div class="invalid-feedback">
                                     Vui lòng sửa lại
-                                  </div>
+                                </div>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="" class=" col-form-label">M</label>
                                 <input type="number" name="kichthuoc[M]" id="" class="form-control" required min="0">
                                 <div class="invalid-feedback">
                                     Vui lòng sửa lại
-                                  </div>
+                                </div>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="" class=" col-form-label">L</label>
                                 <input type="number" name="kichthuoc[L]" id="" class="form-control" required min="0">
                                 <div class="invalid-feedback">
                                     Vui lòng sửa lại
-                                  </div>
+                                </div>
                             </div>
                             {{-- <div class="form-group col-md-3">
                                     <label for="" class=" col-form-label"></label>
@@ -160,9 +176,8 @@
 </div>
 @endsection
 @section('editor')
-@include('Admin.PluginJs.Editor')
+@include('admin.pluginjs.editor')
 <script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
     (function() {
       'use strict';
       window.addEventListener('load', function() {
@@ -179,6 +194,8 @@
           }, false);
         });
       }, false);
+
     })();
-    </script>
+
+</script>
 @endsection

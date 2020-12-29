@@ -15,7 +15,7 @@
 </div>
 <!-- Breadcrumb End -->
 <!-- Shop Section Begin -->
-<section class="shop spad">
+<section class="shop spad" >
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-3">
@@ -27,20 +27,20 @@
                         <div class="categories__accordion">
                             <div class="accordion" id="accordionExample">
                                 <div class="card">
-                                    
+
                                     <ul class="card-heading">
-                        @foreach($category as $c)
-                        
-                                    
-                         <a href="{{route('category',$c->url)}}" >{{$c->title}}</a>
-                                    
-                                
-                        @endforeach
-                    </ul>
-                    </div>
-                            
-                </div>
-            </div>
+                                        @foreach($category as $c)
+
+
+                                        <a href="{{route('category',$c->url)}}">{{$c->title}}</a>
+
+
+                                        @endforeach
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
                     <div class="sidebar__filter">
                         <div class="section-title">
@@ -48,7 +48,7 @@
                         </div>
                         <div class="filter-range-wrap">
                             <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                            data-min="33" data-max="99"></div>
+                                data-min="33" data-max="99"></div>
                             <div class="range-slider">
                                 <div class="price-input">
                                     <p>Price:</p>
@@ -158,22 +158,26 @@
 
             <div class="col-lg-9 col-md-9">
                 <div class="row">
+               
                     @foreach ($product as $item)
+
                     <div class="col-lg-4 col-md-6">
                         <div class="product__item">
-                            <div class="product__item__pic set-bg" >
+                            <div class="product__item__pic set-bg">
                                 <a href="#">
-                                     <img src="{{asset("images/product/$item->urlimage")}}" >
+                                    <img src="{{asset("images/product/$item->urlimage")}}">
                                 </a>
-                                  <div class="label new">New</div>
-                                    <ul class="product__hover">
-                                        <li><a href="{{url("./img/product/$item->urlimage")}}" class="image-popup"><span class="arrow_expand"></span></a></li>
-                                        <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                        <li><a href="javascript:" onclick="AddCart({{$item->idproduct}})"><span class="icon_bag_alt"></span></a></li>
-                                    </ul>
+                                <div class="label new">New</div>
+                                <ul class="product__hover">
+                                    <li><a href="{{url("./img/product/$item->urlimage")}}" class="image-popup"><span
+                                                class="arrow_expand"></span></a></li>
+                                    <li><a href="#"><span class="icon_heart_alt"></span></a></li>
+                                    <li><a href="javascript:" onclick="AddCart({{$item->idproduct}})"><span
+                                                class="icon_bag_alt"></span></a></li>
+                                </ul>
                             </div>
                             <div class="product__item__text">
-                            <h6><a href="{{url("sanpham/$item->url")}}">{{$item->title}}</a></h6>
+                                <h6><a href="{{url("sanpham/$item->url")}}">{{$item->title}}</a></h6>
                                 <div class="rating">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -181,18 +185,11 @@
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                 </div>
-                            <div class="product__price">{{number_format($item->price)}}₫</div>
+                                <div class="product__price">{{number_format($item->price)}}₫</div>
                             </div>
                         </div>
                     </div>
-            @endforeach
-
-
-
-
-
-
-
+                    @endforeach
                     <div class="col-lg-12 text-center">
                         <div class="pagination__option">
                             <a href="#">1</a>

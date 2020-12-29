@@ -31,7 +31,7 @@
                             <td>{{$item->point}}</td>
                             <td>{{$item->address}}</td>
                             <td>{{$item->status}}</td>
-                            <td><a href="#" class="btn btn-info btn-circle btn-sm"><i
+                            <td><a href="{{route('admins.khachhang.history',['id'=>$item->id])}}" class="btn btn-info btn-circle btn-sm"><i
                                         class="fas fa-info-circle"></i></a></td>
                         </tr>
                         @endforeach
@@ -43,5 +43,5 @@
 </div>
 @endsection
 @section('dataTable',)
-@include('Admin.PluginJs.dataTable')
+@include('admin.pluginjs.datatable')
 @endsection

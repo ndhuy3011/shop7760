@@ -39,4 +39,15 @@ class UpdateColorRequest extends FormRequest
             'color' => 'required',
         ];
     }
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'color.required' => 'Bạn phải nhập màu',
+        ];
+    }
 }
