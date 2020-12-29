@@ -27,18 +27,18 @@
                         <div class="categories__accordion">
                             <div class="accordion" id="accordionExample">
                                 <div class="card">
-
+                                    
                                     <ul class="card-heading">
                         @foreach($category as $c)
-
-
+                        
+                                    
                          <a href="{{route('category',$c->url)}}" >{{$c->title}}</a>
-
-
+                                    
+                                
                         @endforeach
                     </ul>
                     </div>
-
+                            
                 </div>
             </div>
                     </div>
@@ -158,9 +158,7 @@
 
             <div class="col-lg-9 col-md-9">
                 <div class="row">
-
                     @foreach ($product as $item)
-
                     <div class="col-lg-4 col-md-6">
                         <div class="product__item">
                             <div class="product__item__pic set-bg" >

@@ -11,12 +11,11 @@
                     <p class="pull-left">Tìm thấy {{count($product)}} sản phẩm</p>
                 </div>
             </div>
-
+            
         </div>
-
+        
         <div class="col-lg-9 col-md-9">
-            <div class="row">
-                {{dd($product)}}
+            <div class="row"> 
                 @foreach ($product as $c)
                 <div class="col-lg-4 col-md-6">
                     <div class="product__item">
@@ -44,14 +43,14 @@
                         </div>
                     </div>
                 </div>
-        @endforeach
-
-
-
-
-
-
-
+        @endforeach       
+                
+                
+                
+                
+                
+               
+                
                 <div class="col-lg-12 text-center">
                     <div class="pagination__option">
                         <a href="#">1</a>
@@ -62,15 +61,15 @@
                 </div>
             </div>
         </div>
-
-
-
-
-
-
-
+    
+            
+            
+            
+            
+            
+            
         </div>
-
+       
     </div>
     </section>
 

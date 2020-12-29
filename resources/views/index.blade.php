@@ -41,8 +41,8 @@
 <script src="{{asset("js/owl.carousel.min.js")}}"></script>
 <script src="{{asset("js/jquery.nicescroll.min.js")}}"></script>
 <script src="{{asset("js/main.js")}}"></script>
-@yield('js')
-{{-- <script>
+
+<script>
     function AddCart(id){
         $.ajax({
             url:'addCart/'+id,
@@ -54,6 +54,6 @@
 
         });
     }
-</script> --}}
+</script>
 
 </html>
