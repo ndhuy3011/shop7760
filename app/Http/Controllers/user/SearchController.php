@@ -16,7 +16,7 @@ class SearchController extends Controller
         $product = DB::table('product')
             ->join('colorproduct', 'colorproduct.productid', '=', 'product.idproduct')
             ->join('image', 'image.colorproductid', '=', 'colorproduct.idcolorproduct')
-            
+
             ->select('product.title', 'product.price', 'image.url as urlimage')
             ->where ('product.title', 'LIKE', "%$req->key%")
             ->groupBy('image.colorproductid')

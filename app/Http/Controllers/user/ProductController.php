@@ -52,6 +52,7 @@ class ProductController extends Controller
             ->join('product', 'product.idproduct', '=', 'category_products.productsid')
             ->join('colorproduct', 'colorproduct.productid', '=', 'product.idproduct')
             ->join('image', 'image.colorproductid', '=', 'colorproduct.idcolorproduct')
+            ->groupBy('image.colorproductid')
             ->select('product.title', 'product.price', 'image.url as urlimage','category.url')
             ->where('category.url', '=', $url)
             ->get();
@@ -60,6 +61,6 @@ class ProductController extends Controller
             'product' => $product,
             'category' => $category
 
-        ]); 
+        ]);
     }
 }

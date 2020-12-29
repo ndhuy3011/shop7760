@@ -18,18 +18,20 @@ class CartController extends Controller
     }
     public function addCart(Request $request)
     {
-
+       
         $product = DB::table('product')
             ->where('idproduct', '=', $request->id)->first();
         $color = DB::table('colorproduct')
             ->where('colorproduct.idcolorproduct', '=', $request->color)->first();
-        // dd($request->color);
+
         $image = DB::table("image")
             ->where('colorproductid', '=', $color->idcolorproduct)->first();
+
         $size = DB::table('sizeproduct')
             ->where('colorproductid', '=', $color->idcolorproduct)
             ->where('title', '=', $request->size)
             ->first();
+
         $name = $product->title . ' / ' . $color->title . ' / ' . $size->title;
         $key =  Str::slug($name);
         $cart = [
@@ -42,7 +44,8 @@ class CartController extends Controller
             "image" => $image->url ?? NULL
         ];
         $request->session()->put("Cart.$key", $cart);
-        return redirect()->back();
+
+
     }
     public function remove(Request $request)
     {

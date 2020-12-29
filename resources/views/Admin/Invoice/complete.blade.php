@@ -18,7 +18,6 @@
                             <th>Địa chỉ</th>
                             <th>Tổng tiền hoá đơn</th>
                             <th>Trạng thái</th>
-                            <th>Xử lý</th>
                             <th>Chi tiết hoá đơn</th>
                         </tr>
                     </thead>
@@ -30,35 +29,9 @@
                             <td>{{$item->date}}</td>
                             <td>{{$item->phonenumber}}</td>
                             <td>{{$item->address}}</td>
-                            <td>{{number_format($$item->totalmoney,0,'','.')}} ₫</td>
-                            <td>
-                                @if ($item->status==0)
-                                {{"Chưa xử lý đơn hàng"}}
-                                @elseif($item->status==1)
-                                {{"Đang xử lý đơn hàng"}}
-
-                                @elseif($item->status==2)
-                                {{"Xác nhận đơn hàng"}}
-                                @else
-                                {{"Giao đơn hàng"}}
-                                @endif
-                            </td>
-                            <td><a href="{{route('admins.khachhang.dangtienhanh',$item->idinvoice)}}" class="btn btn-success btn-icon-split">
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-check"></i>
-                                    </span>
-                                    <span class="text">
-                                        @if ($item->status==0)
-                                        {{"Đang xử lý đơn hàng"}}
-                                        @elseif($item->status==1)
-                                        {{"Xác nhận đơn hàng"}}
-                                        @elseif($item->status==2)
-                                        {{"Giao đơn hàng"}}
-                                        @else
-                                        {{"hoàn thành đơn hàng"}}
-                                        @endif
-                                    </span>
-                                </a></td>
+                            <td>{{number_format($item->totalmoney,0,'','.')}} ₫</td>
+                            <td><span style="    color: #12e643;
+                                ">Hoàn tất đơn hàng</span> </td>
                             <td><a href="{{route('admins.khachhang.chitiet',$item->idinvoice)}}" class="btn btn-info btn-circle btn-sm"><i
                                         class="fas fa-info-circle"></i></a></td>
                         </tr>
